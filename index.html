@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- Hello -->
+<html>
+<head>
+<title>Earthquake Visualization</title>
+<link rel = "stylesheet" href = "./sources/style.css">
+<script src="./sources/index.js" charset="utf-8" defer></script>
+<script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+    <div class = "container">
+
+        <div class = "entry">
+            <h2>
+                Use this tool to visualize earthquakes.
+            </h2>
+        </div>
+
+        <div class = "entry">
+            <h2>
+                Customize visual:
+            </h2>
+            <div class = "interface">
+                <!-- Start Date; End Date; Max Mag; Min Mag; Max Depth; Min Depth   -->
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start_date">
+
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end_date">
+
+                    <br>
+                    <label for="low_mag">Lower bound on magnitude:</label>
+                    <input type="text" id="low_mag">
+                    <label for="up_mag">Upper bound on magnitude:</label>
+                    <input type="text" id="up_mag">
+                    <br>
+                    <label for="low_depth">Lower bound on depth:</label>
+                    <input type="text" id="low_depth">
+                    <label for="up_depth">Upper bound on depth:</label>
+                    <input type="text" id="up_depth">
+
+                    <br><br>
+                    <button id="create">Create Visual</button>
+            </div>
+        </div>
+
+        <div class = "entry" id="visual_entry">
+            <h2>
+                Earthquake visual:
+            </h2>
+                <div class = "map_container">
+                <img src = "./sources/map.png" class = "map">
+                </div>
+        </div>
+    </div>
+</body>
+</html>
