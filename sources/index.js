@@ -60,17 +60,30 @@ function visualizeCorners()
 {
   visualizePoint(["Center", 0, 0]);
   visualizePoint(["N", 90, 0]);
+    visualizePoint(["NN", 55, 0]);
+  visualizePoint(["NNN", 35, 0]);
+  visualizePoint(["NNN", 25, 0]);
+  
   visualizePoint(["S", -90, 0]);
+  
   visualizePoint(["E", 0, 90]);
+      visualizePoint(["EEEE", 0, 300]);
+  
   visualizePoint(["W", 0, -90]);
-  //visualizePoint(["NN", 180, 0]);
-  //visualizePoint(["NNN", 220, 0]);
-  //visualizePoint(["NNN", 200, 0]);
+    visualizePoint(["WW", 0, -180]);
+      visualizePoint(["WWW", 0, -230]);
+
+   
+
+    visualizePoint(["Sicily", 37.37, 14.21]);
+    visualizePoint(["Taranto Gulf", 39.809, 17.354]);
+    visualizePoint(["Black Sea", 45.1975, 34.205])
+    visualizePoint(["NE Australia", -15.725, 143.11]);
 }
 
 function visualizePoint(point)
 {
-  console.log(point);
+  //console.log(point[0]);
   
   var y = latitudeToY(point[1]);
   var x = longitudeToX(point[2]);
@@ -90,18 +103,52 @@ function visualizePoint(point)
   dot.style.bottom=y;
   dot.style.left=x;
   
+  dot.addEventListener("mouseover", function() {
+                                                  showEqDetails(point[0], y, x);
+                                                });
+    
+  dot.addEventListener("mouseout", hideEqDetails);
 }
+
+function showEqDetails(name, y, x)
+{
+  //Create a popup that displays information about the earthquake
+  var text = document.createTextNode(name);
+  var newP = document.createElement("p");
+  newP.appendChild(text);
+  var popUp = document.createElement("div");
+  popUp.appendChild(newP);
+  
+  popUp.classList.add("popUp");
+
+  var Map = document.getElementsByClassName("map_container");
+  Map[0].appendChild(popUp);
+  
+  
+  popUp.style.bottom=y;
+  popUp.style.left=x;
+}
+
+function hideEqDetails()
+{
+  var dot = document.getElementsByClassName("popUp");
+  dot[0].parentNode.removeChild(dot[0]);
+}
+
 
 function latitudeToY(lat)
 {
   var y = lat;
   
-  y = y*3.88;
-  console.log(3.88);
+  if(lat > 60){y = y*4.05;}
+  else if(lat > 30){y=y*4.12;}
+  else if(lat > 0){y=y*4.5}
+  else{y=y*3.685;}
+
   
   y = y-1.5; //Puts the point on the x-axis
   
-  y=y+350; //Put the point on the equator
+  y=y+334; //Put the point on the equator
   
   return y+"px";
 }
@@ -109,9 +156,15 @@ function latitudeToY(lat)
 function longitudeToX(longitude)
 {
   var x = longitude;
+  
+  if(longitude > 120){x=x*2.4835;}
+  else if(longitude > 60){x=x*2.75;}
+  else if(longitude > 0){x=x*4.2;}
+  else{x=x*3.2085;}
+  
   x = x+5; //Puts the point on the y-axis
   
-  x=x+622; //Put the point on the prime meridian
+  x=x+738; //Put the point on the prime meridian
   
   return x+"px";
 }

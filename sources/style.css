@@ -76,6 +76,19 @@ body
   left: 50%;*/
 }
 
+.earthquake:hover
+{
+  cursor:wait;
+}
+
+.popUp
+{
+  position:relative;
+  background-color:grey;
+  width:100px;
+  text-align:center;
+}
+
 
 .map_container
 {
