@@ -60,25 +60,54 @@ function visualizeCorners()
 {
   visualizePoint(["Center", 0, 0]);
   visualizePoint(["N", 90, 0]);
-    visualizePoint(["NN", 55, 0]);
-  visualizePoint(["NNN", 35, 0]);
-  visualizePoint(["NNN", 25, 0]);
+  //visualizePoint(["NN", 55, 0]);
+  //visualizePoint(["NNN", 35, 0]);
+  //visualizePoint(["NNN", 25, 0]);
   
   visualizePoint(["S", -90, 0]);
   
-  visualizePoint(["E", 0, 90]);
-      visualizePoint(["EEEE", 0, 300]);
+  //visualizePoint(["E", 0, 90]);
+  visualizePoint(["EE", 0, 180]);
   
-  visualizePoint(["W", 0, -90]);
-    visualizePoint(["WW", 0, -180]);
-      visualizePoint(["WWW", 0, -230]);
+  //visualizePoint(["W", 0, -90]);
+  visualizePoint(["WW", 0, -180]);
 
-   
 
-    visualizePoint(["Sicily", 37.37, 14.21]);
-    visualizePoint(["Taranto Gulf", 39.809, 17.354]);
-    visualizePoint(["Black Sea", 45.1975, 34.205])
-    visualizePoint(["NE Australia", -15.725, 143.11]);
+  visualizePoint(["Sicily", 37.37, 14.21]);
+  visualizePoint(["Taranto Gulf", 39.809, 17.354]);
+  visualizePoint(["Black Sea", 45.1975, 34.205])
+  visualizePoint(["NE Australia", -15.725, 143.11]);
+  visualizePoint(["SA Island", -51.98758, -59.328451]);
+  visualizePoint(["Tip of Brazil", -5.178482, -35.451003]);
+  visualizePoint(["Lake Chad", -1.01069, 32.866082]);
+  visualizePoint(["Gulf of California", 30.4411, -113.912]);
+  visualizePoint(["Northern NZ", -38.918394,175.970113]);
+  visualizePoint(["Lake Michigan", 42.365038,-87.134498]);
+  visualizePoint(["Far East Russia", 61.325107,161.171887]);
+  visualizePoint(["Indian Island", 7.519341,80.654884]);
+  visualizePoint(["Hawaii", 19.559790,-155.499443]);
+  visualizePoint(["Alaskan Island", 57.364459,-153.554059]);
+  visualizePoint(["South Alaska", 60.274693,-150.088919]);
+  visualizePoint(["Canadian Island", 53.183656,-132.262189]);
+  visualizePoint(["Pacific Island", -17.853290,178.005414]);
+  visualizePoint(["Indian Ocean Island", -49.382369,69.388931]);
+  visualizePoint(["Somalia", 11.764117,51.231800]);
+  visualizePoint(["Montevideo", -35.542954,-56.332415]);
+  visualizePoint(["Western SA", -18.371208,-70.382681]);
+  visualizePoint(["Antarctica S of NZ", -71.875377,170.917079]);
+  visualizePoint(["Antarctica S of SA", -63.257366,-55.844015]);
+  visualizePoint(["Horn of SA", -54.866490,-64.995081]);
+  visualizePoint(["Strait of Gibraltar", 35.934430,-5.592593]); 
+  visualizePoint(["Ireland", 53.215243,-7.944558]);
+  visualizePoint(["Iceland", 64.744145,-18.364378]);
+  visualizePoint(["Puerto Rico", 18.225177,-66.494519]);
+  visualizePoint(["Galapagos", -0.395506,-90.744981]);
+  visualizePoint(["South Korea", 36.173357,128.021359]);
+  visualizePoint(["Taiwan", 23.845650,121.051490]);
+  visualizePoint(["Tasmania", -42.208991,146.774359]);
+  visualizePoint(["Borneo", 0.747049,114.194231]);
+
+
 }
 
 function visualizePoint(point)
@@ -140,9 +169,16 @@ function latitudeToY(lat)
 {
   var y = lat;
   
-  if(lat > 60){y = y*4.05;}
+  if(lat > 75){y = y*4.05;}
+  else if(lat > 60){y=y*4.09;}
   else if(lat > 30){y=y*4.12;}
+  else if(lat > 20){y=y*4.25;}
+  else if(lat > 15){y=y*4.3;}
+  else if(lat > 10){y=y*4.38;}
   else if(lat > 0){y=y*4.5}
+  else if(lat > -30){y=y*4.1;}
+  else if(lat > -60){y=y*4.116;}
+  else if(lat > -80){y=y*4.05;}
   else{y=y*3.685;}
 
   
@@ -157,10 +193,16 @@ function longitudeToX(longitude)
 {
   var x = longitude;
   
-  if(longitude > 120){x=x*2.4835;}
-  else if(longitude > 60){x=x*2.75;}
-  else if(longitude > 0){x=x*4.2;}
-  else{x=x*3.2085;}
+  //if(longitude > 120){x=x*4.125;}
+  if(longitude > 130){x=x*4.135;}
+  else if(longitude > 95){x=x*4.125;}
+  else if(longitude > 60){x=x*4.15;}
+  else if(longitude > 0){x=x*4.207;}
+  else if(longitude > -30){x=x*3.7;}
+  else if(longitude > -40){x=x*3.96;}
+  else if(longitude > -60){x=x*4.07;}
+  else if(longitude > -120){x=x*4.08;}
+  else{x=x*4.09;}
   
   x = x+5; //Puts the point on the y-axis
   
