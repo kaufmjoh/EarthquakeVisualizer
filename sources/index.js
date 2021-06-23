@@ -27,6 +27,8 @@ var lines = [];
 
 function createVisual()
 {
+
+  removeAllEqs();
   updateInputValues();
 
   //alert(lines[5829]);
@@ -36,25 +38,44 @@ function createVisual()
   
   var data_point;
   
-  visualizeCorners();
+  //visualizeCorners();
   
+  var trues = 0;
+  var falses = 0;
   
-  //for(var i = 0; i < lines.length; i++)
-  //{
-    data_point = lines[0];
-    //test
+  for(var i = 0; i < lines.length; i++)
+  {
+    data_point = lines[i];
+  
     if(validPoint(data_point))
     {
-      console.log("true");
-      //visualizePoint(data_point);
+      visualizePoint(data_point);
+      trues++;
     }
     else
     {
-      console.log("false");
+     // console.log(data_point);
+      falses++;
+     // break;
     }
-  //}
+  }
   
+  console.log("Visualized ", trues, " earthquakes");
+  console.log("Skipped ", falses, " earthquakes");
+  
+  if(trues==0){alert("No earthquakes fall within the entered search parameters.");}
 }
+
+function removeAllEqs()
+{
+  var eqs = document.getElementsByClassName("earthquake");
+
+  for(var i = (eqs.length-1); i >=0; i--)
+  {
+    eqs[i].parentNode.removeChild(eqs[i]);
+  }
+}
+
 
 function visualizeCorners()
 {
@@ -116,6 +137,7 @@ function visualizePoint(point)
   
   var y = latitudeToY(point[1]);
   var x = longitudeToX(point[2]);
+  var color = depthToColor(point[3]);
   
   var dot = document.createElement("div");
   dot.classList.add("earthquake");
@@ -131,18 +153,35 @@ function visualizePoint(point)
   
   dot.style.bottom=y;
   dot.style.left=x;
+  dot.style.backgroundColor=color;
   
   dot.addEventListener("mouseover", function() {
-                                                  showEqDetails(point[0], y, x);
+                                                  showEqDetails(point, y, x);
                                                 });
     
   dot.addEventListener("mouseout", hideEqDetails);
 }
 
-function showEqDetails(name, y, x)
+function depthToColor(depth)
+{
+  if(depth > 600){return "DarkBlue;"}
+  else if(depth > 540){return "CornflowerBlue";}
+  else if(depth > 480){return "AquaMarine";}
+  else if(depth > 420){return "MediumSpringGreen";}
+  else if(depth > 360){return "Lime";}
+  else if(depth > 300){return "YellowGreen";}
+  else if(depth > 240){return "Yellow";}
+  else if(depth > 180){return "Orange";}
+  else if(depth > 120){return "Tomato";}
+  else if(depth > 60){return "OrangeRed"}
+  else{return "Crimson";}
+}
+
+
+function showEqDetails(point, y, x)
 {
   //Create a popup that displays information about the earthquake
-  var text = document.createTextNode(name);
+  var text = document.createTextNode("Latitude: "+point[1]+", Longitude: "+point[2] +", Depth: "+point[3]+", Magnitude: "+point[4]);
   var newP = document.createElement("p");
   newP.appendChild(text);
   var popUp = document.createElement("div");
@@ -153,9 +192,14 @@ function showEqDetails(name, y, x)
   var Map = document.getElementsByClassName("map_container");
   Map[0].appendChild(popUp);
   
+  var num = parseInt(x.substring(0,4));
+  if(num > 740){num=num-215;}
+  console.log("State");
+  num=num+"px";
   
+  console.log(y, x, num);
   popUp.style.bottom=y;
-  popUp.style.left=x;
+  popUp.style.left=num;
 }
 
 function hideEqDetails()
@@ -218,7 +262,7 @@ function validPoint(point)
 {    
   //console.log(point);
 
-  if(point[0] < sd_val || point[0] > ed_val || point[3] < lm_val || point[3] > um_val || point[4] < ld_val || point[4] > ud_val) {return false;}
+  if(point[0] < sd_val || point[0] > ed_val || point[4] < lm_val || point[4] > um_val || point[3] < ld_val || point[3] > ud_val) {return false;}
   else{return true;}
 }
 
